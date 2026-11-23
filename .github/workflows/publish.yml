@@ -26,13 +26,14 @@ jobs:
         with:
           version: 9
 
+      # 故意不设 registry-url：那会写入带占位符 _authToken 的 .npmrc，
+      # npm 会把它当真实凭据去做认证并 401，从而绕过 OIDC。
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: pnpm
-          registry-url: https://registry.npmjs.org
 
-      # Trusted Publisher 要求 npm CLI ≥ 11.5.1 才能走 OIDC
+      # Trusted Publisher 要求 npm CLI ≥ 11.5.1 才支持 OIDC
       - name: 升级 npm
         run: npm install -g npm@latest
 
@@ -53,10 +54,12 @@ jobs:
             exit 1
           fi
 
-      - name: 发布到 npm
+      # 用 npm 而非 pnpm 发布：pnpm publish 会把 --no-git-checks 透传给 npm，
+      # 新版 npm 不认该参数直接 EUNKNOWNCONFIG；OIDC 也要求走 npm CLI。
+      - name: 发布到 npm（OIDC）
         if: ${{ !inputs.dry_run }}
-        run: pnpm publish --access public --provenance --no-git-checks
+        run: npm publish --access public --provenance
 
       - name: 构建预览（dry run）
         if: ${{ inputs.dry_run }}
-        run: pnpm publish --access public --no-git-checks --dry-run
+        run: npm publish --access public --provenance --dry-run
