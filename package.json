@@ -1,0 +1,64 @@
+{
+  "name": "oreoreo-llm-4-dsh",
+  "version": "0.1.0",
+  "description": "One-click Oreo (oreoreo.voyage200.top) provider onboarding for DeepSeek Harness: paste an API key, the plugin writes the baseURL, protocol and model catalog.",
+  "license": "MIT",
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
+  "files": [
+    "lib",
+    "README.md",
+    "LICENSE",
+    "cordis.patch.yml"
+  ],
+  "keywords": [
+    "dsh-plugin",
+    "deepseek-harness",
+    "llm",
+    "provider",
+    "oreoreo"
+  ],
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./client": {
+      "types": "./lib/types/client/index.d.ts",
+      "default": "./lib/client.js"
+    },
+    "./package.json": "./package.json",
+    "./locale/*.json": "./locale/*.json"
+  },
+  "dsh": {
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-api-remotes",
+        "@deepseek-ai/dsh-client-ui-settings",
+        "@deepseek-ai/dsh-client-locale"
+      ],
+      "platform": "web"
+    },
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "devDependencies": {
+    "@deepseek-ai/schemastery": "^3.19.0",
+    "@earendil-works/pi-ai": "^1.6.0",
+    "@types/react": "18.3.12",
+    "typescript": "5.7.3"
+  },
+  "scripts": {
+    "build": "rm -rf build && tsc -p tsconfig.json && node scripts/build.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "clean": "rm -rf build lib"
+  },
+  "author": "voyage200",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/voyage200/oreoreo-llm-4-dsh.git"
+  },
+  "homepage": "https://oreoreo.voyage200.top"
+}

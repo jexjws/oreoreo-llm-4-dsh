@@ -1,0 +1,27 @@
+# oreoreo-llm-4-dsh bundle patch.
+#
+# A bundle patch is applied as ONE layer over the profile it is installed into.
+# Its job is to name the plugin row this package contributes — without it the
+# installer treats the package as a plain dependency and never loads it (the
+# exact warning `dsh plugin add` prints: "declares no dsh.bundle").
+#
+# ONE row, not two. The package is dual-face the way the shipped client plugins
+# are: this row loads the host half (`lib/index.js`), and the host half declares
+# nothing browser-side itself — the web app's `modules` node reads the package's
+# `dsh.client` block from package.json, serves `lib/client.js` from
+# `/plugins/<id>/client.js`, and mounts it in the browser module table.
+#
+# Declaring the browser half as a second row here would make the NODE loader
+# import it, which is how this plugin first failed on the real runtime:
+#     oreoreo-llm-4-dsh-client: failed to import: ReferenceError: window is not defined
+#
+# The row is not `disabled`, so installing the package activates both halves.
+
+- insert:
+    - id: oreoreo-llm-4-dsh
+      name: oreoreo-llm-4-dsh
+      config:
+        baseURL: https://oreoreo.voyage200.top/v1
+        displayName: Oreo
+        apiKeyEnv: OREO_OREO_API_KEY
+        autoConfigure: true
