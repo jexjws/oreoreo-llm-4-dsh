@@ -1,5 +1,5 @@
 {
-  "name": "oreoreo-llm-4-dsh",
+  "name": "@voyage200/oreoreo-llm-4-dsh",
   "version": "0.1.0",
   "description": "One-click Oreo (oreoreo.voyage200.top) provider onboarding for DeepSeek Harness: paste an API key, the plugin writes the baseURL, protocol and model catalog.",
   "license": "MIT",
