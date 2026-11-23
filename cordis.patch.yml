@@ -19,7 +19,9 @@
 
 - insert:
     - id: oreoreo-llm-4-dsh
-      name: @voyage200/oreoreo-llm-4-dsh
+      # 带作用域的包名必须加引号：`@` 是 YAML 保留指示符，
+      # 不引号会让整份 patch 解析失败（bad indentation of a mapping entry）。
+      name: '@voyage200/oreoreo-llm-4-dsh'
       config:
         baseURL: https://oreoreo.voyage200.top/v1
         displayName: Oreo
