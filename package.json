@@ -58,7 +58,9 @@
   "author": "voyage200",
   "repository": {
     "type": "git",
-    "url": "https://github.com/voyage200/oreoreo-llm-4-dsh.git"
+    "url": "git+https://github.com/jexjws/oreoreo-llm-4-dsh.git"
   },
-  "homepage": "https://oreoreo.voyage200.top"
+  "bugs": {
+    "url": "https://github.com/jexjws/oreoreo-llm-4-dsh/issues"
+  }
 }

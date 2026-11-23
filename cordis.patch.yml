@@ -19,7 +19,7 @@
 
 - insert:
     - id: oreoreo-llm-4-dsh
-      name: oreoreo-llm-4-dsh
+      name: @voyage200/oreoreo-llm-4-dsh
       config:
         baseURL: https://oreoreo.voyage200.top/v1
         displayName: Oreo

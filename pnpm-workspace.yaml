@@ -1,3 +1,7 @@
-allowBuilds:
-  '@google/genai': true
-  protobufjs: true
+packages:
+  - .
+
+# 允许这些依赖的安装脚本运行（新版 pnpm 默认拦截未授权的构建脚本）
+onlyBuiltDependencies:
+  - '@google/genai'
+  - protobufjs
